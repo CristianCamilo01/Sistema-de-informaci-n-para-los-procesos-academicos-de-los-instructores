@@ -1,0 +1,718 @@
+{\rtf1\ansi\ansicpg1252\deff0\deflang9226{\fonttbl{\f0\fnil\fcharset0 Calibri;}}
+{\*\generator Msftedit 5.41.21.2510;}\viewkind4\uc1\pard\sa200\sl276\slmult1\lang10\f0\fs22 create database project;\par
+use project;\par
+/***************************TABLA PERSONA****************/\par
+create table person (\par
+identification bigint primary key,\par
+nameperson varchar (30) not null,\par
+lastname varchar (30) not null,\par
+birthdate date not null,\par
+phone int unsigned not null,\par
+cell_phone  bigint  unsigned not null,\par
+email varchar (80) not null unique,\par
+passwordperson varchar (30) not null,\par
+state_person varchar(15) null default 'Activo',\par
+position varchar(50) not null\par
+);\par
+/*-----------INSERCI\'d3N DE DATOS PARA LA TABLA PERSONA--------------------------*/\par
+insert into person (identification, nameperson, lastname, birthdate, phone, cell_phone, email, passwordperson, state_person, position)\par
+values (1007392829,'Cristi\'e1n', 'Arevalo Perdomo', '2000-05-05-', 6974212, 3115975213, 'cristianc@misena.edu.com', '12345', 'Activo', 'Instructor');\par
+insert into person (identification, nameperson, lastname, birthdate, phone, cell_phone, email, passwordperson, state_person, position)\par
+values (107392829,'Camilo', 'Arevalo Perdomo', '2000-05-13-', 7424651, 3123455973, 'ccamilo@misena.edu.com', '67890', 'Activo', 'Administrativo');\par
+/*-----------CONSULTA DE LA TABLA  PERSONA--------------------------*/\par
+select * from person;\par
+\par
+/***************************TABLA ROLES****************/\par
+create table roles (\par
+code_rol bigint primary key auto_increment,\par
+name_rol varchar(50) not null unique,\par
+status_rol varchar(15) null default 'Activo'\par
+);\par
+/*-----------INSERCI\'d3N DE DATOS PARA LA TABLA ROLES--------------------------*/\par
+insert into roles (name_rol) values ('Administrador');\par
+insert into roles (name_rol) values ('L\'edder de pedag\'f3gico de \'e1rea');\par
+insert into roles (name_rol) values ('L\'edder pedag\'f3gico de aticulaci\'f3n');\par
+insert into roles (name_rol) values ('L\'edder de equipo ejecutor');\par
+insert into roles (name_rol) values ('Equipo ejecutor');\par
+/*-----------CONSULTA TABLA ROLES---------------*/\par
+select * from roles ;\par
+/***************************TABLA CENTRO_FORMACION****************/\par
+create table training_center (\par
+code_center_training bigint primary key auto_increment,\par
+name_center_training varchar(100) not null,\par
+regional varchar(50) not null,\par
+state_training_center varchar(15) null default 'Activo'\par
+); \par
+/*-----------INSERCI\'d3N DE DATOS PARA CENTRO DE FORMACI\'d3N--------------------------*/\par
+insert into training_center (name_center_training, regional) values ('Centro de mercados, logistica y tecnolog\'edas de la informaci\'f3n', 'Bogota.D.C'); \par
+insert into training_center (name_center_training, regional) values ('Centro de gesti\'f3n administrativa', 'Bogota.D.C'); \par
+insert into training_center (name_center_training, regional) values ('Centro nacional de hoteleria, turismo y alimentos ', 'Bogota.D.C'); \par
+/*-----------CONSULTA DE DATOS PARA CENTRO DE FORMACI\'d3N--------------------------*/\par
+select * from training_center;\par
+/***************************TABLA DISE\'d1O CURRICULAR****************/\par
+create table curricular_design (\par
+code_curricular_design  bigint  primary key,\par
+denomination_program varchar (50) not null,\par
+version smallint unsigned not null,\par
+state  varchar (20) not null,\par
+date_start date not null,\par
+date_end varchar(50) not null,\par
+duration_lective_m tinyint unsigned not null,\par
+duration_practice_m tinyint unsigned not null,\par
+total_months tinyint unsigned not null,\par
+training_level varchar(20) not null,\par
+justification_d_c varchar(3000) not null,\par
+requirements_entry  varchar(200) not null,\par
+description varchar(200) not null,\par
+quantity_competencies tinyint unsigned not null,\par
+requirements_academic varchar (500) not null,\par
+work_experience varchar(300) not null,\par
+minimal_competencies varchar(300) not null,\par
+methodological_strategy  varchar (1000) not null,\par
+status_curricular_design varchar(20) null default 'Sin verificaci\'f3n',\par
+code_center_training_curric_design bigint,\par
+constraint code_center_training0  foreign key (code_center_training_curric_design) references training_center (code_center_training)\par
+);\par
+\par
+/*----------INSERCI\'d3N DE DATOS PARA LA TABLA DISE\'d1O CURRICULAR-------------------------*/\par
+insert into curricular_design (code_curricular_design, denomination_program, version, state, date_start, date_end, duration_lective_m, duration_practice_m, total_months, training_level, justification_d_c, requirements_entry, description, quantity_competencies, requirements_academic, work_experience, minimal_competencies, methodological_strategy, code_center_training_curric_design)\par
+values (228120, 'Programaci\'f3n de software', 102, 'En ejecusi\'f3n', '2013-04-12', 'a\'fan vigente', 6, 6, 12, 'T\'e9cnico', 'El programa T\'e9cnico en Programaci\'f3n de Software se cre\'f3 para brindar al sector productivo\par
+nacional en general (debido a que la Industria del Software aplica para la mejora de los procesos\par
+productivos en todos los sectores ya sea industria, comercio, servicios, sector primario y extractivo,\par
+etc), la posibilidad de incorporar personal con altas calidades laborales y profesionales que\par
+contribuyan al desarrollo econ\'f3mico, social y tecnol\'f3gico de su entorno y del pa\'eds, as\'ed mismo\par
+ofrecer a los aprendices formaci\'f3n en las tecnolog\'edas relacionados con el ciclo de vida del Software\par
+incluyendo las fases de An\'e1lisis y Desarrollo de Software, factores muy importantes para la\par
+competitividad y el efectivo posicionamiento de esta industria en el pa\'eds.\par
+En todo el pa\'eds se cuenta con potencial productivo para la Programaci\'f3n de Software, gracias al\par
+apalancamiento de clusters directamente relacionados con la industria de software como\par
+ParqueSoft en el Occidente, la Alianza SinerTIC en la zona Central o Intersoftware en Antioquia.\par
+Su fortalecimiento y crecimiento socio-econ\'f3mico tanto a nivel regional como nacional, dependen\par
+en gran medida de un recurso humano cualificado y calificado, capaz de responder integralmente a\par
+la din\'e1mica del sector.\par
+El SENA ofrece este programa con todos los elementos de formaci\'f3n profesional, sociales,\par
+tecnol\'f3gicos y culturales, aportando como elementos diferenciadores de valor agregado\par
+metodolog\'edas de aprendizaje innovadoras, el acceso a tecnolog\'edas de \'faltima generaci\'f3n y una\par
+estructuraci\'f3n sobre m\'e9todos m\'e1s que contenidos, lo que potencia la formaci\'f3n de ciudadanos\par
+librepensadores, con capacidad cr\'edtica, solidaria y emprendedora, factores que lo acreditan y lo\par
+hacen pertinente y coherente con su misi\'f3n, innovando permanentemente de acuerdo con las\par
+tendencias y cambios tecnol\'f3gicos y las necesidades del sector empresarial y de los trabajadores,\par
+impactando positivamente la productividad, la competitividad, la equidad y el desarrollo del pa\'eds',\par
+'Acad\'e9micos: 9 grado Superar prueba de aptitud, motivaci\'f3n, inter\'e9s y competencias m\'ednimas de ingreso', 'Desarrolla e implementa aplicativos de software para entornos Windows o entornos Web sobre\par
+diferentes plataformas y lenguajes de programaci\'f3n.', 1, 'El programa requiere de un equipo de instructores con T\'edtulo de Tecn\'f3logo o Cuatro (4) a\'f1os de\par
+Estudios Universitarios, relacionados con la especialidad objeto de formaci\'f3n, preferiblemente con\par
+Certificaci\'f3n Internacional en Desarrollo de Soluciones de Software ya sea en Tecnolog\'edas Sun\par
+Microsystems (Java o MySQL), Microsoft (Visual Studio o SQL Server) u Oracle (Administraci\'f3n o\par
+Desarrollo sobre PL/SQL)', 'Veinticuatro (24) meses de Experiencia: de los cuales Dieciocho (18) meses estar\'e1n relacionados con\par
+el ejercicio de la profesi\'f3n u oficio objeto de la formaci\'f3n profesional y Seis (6) meses en labores de\par
+docencia.', 'Buen nivel de lectura y escucha del idioma ingl\'e9s, y un nivel medio de habla de este idioma.\par
+Formular, ejecutar y evaluar proyectos. Trabajar en equipo Establecer procesos comunicativos asertivos Manejar herramientas inform\'e1ticas asociadas al \'e1rea objeto de la formaci\'f3n', 'Centrada en la construcci\'f3n de autonom\'eda para garantizar la calidad de la formaci\'f3n en el marco de la formaci\'f3n por competencias, el aprendizaje por proyectos y el uso de t\'e9cnicas did\'e1cticas activas que\par
+estimulan el pensamiento para la resoluci\'f3n de problemas simulados y reales; soportadas en el\par
+utilizaci\'f3n de las tecnolog\'edas de la informaci\'f3n y la comunicaci\'f3n, integradas, en ambientes abiertos y\par
+pluritecnol\'f3gicos, que en todo caso recrean el contexto productivo y vinculan al aprendiz con la realidad\par
+cotidiana y el desarrollo de las competencias.\par
+Igualmente, debe estimular de manera permanente la autocr\'edtica y la reflexi\'f3n del aprendiz sobre el\par
+que hacer y los resultados de aprendizaje que logra a trav\'e9s de la vinculaci\'f3n activa de las cuatro\par
+fuentes de informaci\'f3n para la construcci\'f3n de conocimiento:\par
+El instructor - Tutor El entorno Las TIC El trabajo colaborativo', 1);\par
+/* CONSULTA PARA LA TABLAQ DISE\'d1O CURRICULAR*/\par
+SELECT * from curricular_design;\par
+\par
+/***************************TABLA COMPETENCIAS_DESARROLLAR****************/\par
+create table competencies_developed ( \par
+code_competencies bigint primary key ,\par
+denomination_competencies varchar(300) not null,\par
+version_ncl smallint unsigned not null,\par
+duration_estimated_h smallint unsigned not null,\par
+code_curricular_design_comp_devel bigint,\par
+constraint code_curricular_design1 foreign key (code_curricular_design_comp_devel) references curricular_design (code_curricular_design)\par
+);\par
+/***********************INSERCI\'d3N DE LA TABLA COMPETENCIAS***************/\par
+insert into competencies_developed (code_competencies, denomination_competencies, version_ncl, duration_estimated_h, code_curricular_design_comp_devel)\par
+values (220501007, 'CONSTRUIR EL SISTEMA QUE CUMPLA CON LOS REQUISITOS DE LA SOLUCI\'d3N INFORM\'c1TICA.', 3, 500, 228120);\par
+insert into competencies_developed (code_competencies, denomination_competencies, version_ncl, duration_estimated_h, code_curricular_design_comp_devel)\par
+values (220501032, 'ANALIZAR LOS REQUISITOS DEL CLIENTE PARA CONSTRUIR EL SISTEMA DE INFORMACION', 2, 380, 228120);\par
+insert into competencies_developed (code_competencies, denomination_competencies, version_ncl, duration_estimated_h, code_curricular_design_comp_devel)\par
+values (240201501, 'COMPRENDER TEXTOS EN INGL\'c9S EN FORMA ESCRITA Y AUDITIVA', 1, 180, 228120);\par
+/* CONSULTA PARA LA TABLA DISE\'d1O CURRICULAR*/\par
+SELECT * from competencies_developed;\par
+\par
+\par
+/***************************TABLA RESULTADO_APRENDIZAJE****************/\par
+create table learning_outcomes (\par
+code_learning_outcomes bigint primary key,\par
+denomination_learning_outcomes varchar(200) not null,\par
+type_learning_outcomes varchar(20) not null,\par
+code_competencies_learn_outc bigint , \par
+constraint code_competencies1 foreign key (code_competencies_learn_outc) references competencies_developed(code_competencies)\par
+);\par
+\par
+insert into learning_outcomes (code_learning_outcomes, denomination_learning_outcomes, type_learning_outcomes, code_competencies_learn_outc)\par
+values (437657, 'RELACIONAR TABLAS CONSTRUIDAS PARA PRESENTAR LA INFORMACI\'d3N SOLICITADA EN EL DISE\'d1O', 'Basico', 220501007);\par
+insert into learning_outcomes (code_learning_outcomes, denomination_learning_outcomes, type_learning_outcomes, code_competencies_learn_outc)\par
+values (437633, 'INTERPRETAR EL DIAGRAMA PARA IDENTIFICAR EL MODELO DE DATOS', 'Basico', 220501032);\par
+select * from learning_outcomes;\par
+\par
+/***************************TABLA COMPLEMENTO_DISE\'d1O_CURRICULAR****************/\par
+\par
+create table knowledge_and_criteria (\par
+code_complement bigint primary key auto_increment,\par
+knowledge varchar(4000) null default 'Sin conocimientos de conceptos y principios',\par
+knowledge_processes varchar (4000) null default 'Sin conocimientos de procesos',\par
+evaluation_criteria varchar(4000) null default 'Sin criterios de evaluaci\'f3n',\par
+code_competencies_know_crit bigint ,\par
+constraint code_competencies2 foreign key (code_competencies_know_crit) references competencies_developed(code_competencies)\par
+);\par
+insert into knowledge_and_criteria (knowledge, knowledge_processes, evaluation_criteria, code_competencies_know_crit)\par
+values ('INFORME T\'c9CNICO DE DISE\'d1O: DEFINICI\'d3N, OBJETIVOS, CARACTER\'cdSTICAS, ESTRUCTURA SQL SERVER: CONCEPTO, INTEGRACI\'d3N (CON DIFERENTES SISTEMAS OPERATIVOS), SEGURIDAD, OBJETOS DE UNA BASE DE DATOS, ENTORNO DE TRABAJO, INSTALACI\'d3N, TABLAS,INTEGRIDAD DE LOS DATOS, \'cdNDICES, VISTAS, PERMISOS, PROCEDIMIENTOS, DISPARADORES\par
+(TRIGGERS), CONEXIONES, ELEMENTOS, ENTERPRISE MANAGER (ADMINISTRADOR CORPORATIVO), QUERY ANALYZER\par
+(ANALIZADOR DE CONSULTAS) ORACLE : CONCEPTO, INTEGRACI\'d3N (CON DIFERENTES SISTEMAS OPERATIVOS), SEGURIDAD, OBJETOS DE UNA BASE DE DATOS, ENTORNO DE TRABAJO, INSTALACI\'d3N, TABLAS, INTEGRIDAD DE LOS DATOS, \'cdNDICES, VISTAS, PERMISOS, PROCEDIMIENTOS, DISPARADORES(TRIGGERS), CONEXIONES,\par
+ ELEMENTOS, DISCOVERER, FORMS, REPORT, GRAPHIC LENGUAJE DE PROGRAMACI\'d3N. (.NET): INTRODUCCI\'d3N, COMPONENTES FUNDAMENTALES, FUNCIONAMIENTO INTERNO DEL CLR, BIBLIOTECAS PRINCIPALES, VENTAJAS, HERRAMIENTAS\par
+DE DESARROLLO, NOVEDADES, SEGURIDAD APLICACIONES WEB CON ASP.NET : INTRODUCCI\'d3N, FORMULARIOS WEB (WEB FORMS), CONFIGURACI\'d3N, AUTENTICACI\'d3N, MANTENIMIENTO, MASTER PAGES THEMES Y SKINS, NAVEGACI\'d3N, ACCESO A DATOS, COMPILACI\'d3N E INSTALACI\'d3N, REFERENCIAS, SEGURIDAD\par
+ASP.NET AJAX, ARQUITECTURA, FRAMEWORK 3.0 WCF, FRAMEWORK 3.0 WWF, HOL INTEGRADOR APLICACIONES WINDOWS CON WINFORMS: INTRODUCCI\'d3N, EL DISE\'d1ADOR DE FORMULARIOS, OBJETO FORM, CONTROLES, DISE\'d1O DE INTERFAZ DE USUARIO, HERENCIA\par
+VISUAL, CONFIGURACI\'d3N, DI\'c1LOGOS COMUNES, ENLACE A DATOS, DISTRIBUCI\'d3N DE LA APLICACI\'d3N, REFERENCIAS, ACCESO A DATOS AVANZADO, WEB SERVICES, SEGURIDAD.INTRODUCCI\'d3N, WINDOWS CARDSPACE, WINDOWS PRESENTATION FOUNDATION, WINDOWS COMMUNICATION FOUNDATION, WINDOWS WORKFLOW FOUNDATION. JAVA: HISTORIA, ARQUITECTURA DE LIBRER\'cdAS, COMPONENTES (M\'c1QUINA VIRTUAL DE JAVA).\par
+JDK (JAVA DEVELOPMENT KIT), EL COMPILADOR JAVAC, EL DOCUMENTADOR JAVADOC, ENTORNO DE EJECUCI\'d3N JAVA, EL ENTORNO DE EJECUCI\'d3N DE APPLETS APPLETVIEWER, IDES DE DESARROLLO (JBUILDER, FORTE4JAVA, NETBEANS, ECLIPSE, JDEVELOPER, WHEBSPHERE) Y EDITORES (JCREATOR, JAVABOX, TEXTPAD, NETBEANS), OBJETOS, CLASES (JFC JAVA\par
+FOUNDATION CLASSES), M\'c9TODOS Y ATRIBUTOS DE CLASE Y DE INSTANCIA, HERENCIA,\par
+POLIMORFISMO, ENCAPSULAMIENTO, INTERFACES, COLLECTIONS (CLASES VECTOR, ARRAYLIST,\par
+INTERFACES ITERATOR, ENUMERATION), PAQUETES Y JARS, BUFFERS DE ENTRADA Y SALIDA\par
+(JAVA.IO), PROGRAMACION MULTI HILOS, SINCRONIZACION Y CONCURRENCIA, COMUNICACI\'d3N\par
+POR SOCKETS (TRANSMISI\'d3N DE CADENAS, ARCHIVOS Y OBJETOS A TRAV\'c9S DE LA RED), RPC\par
+(LLAMADO A PROCEDIMIENTOS REMOTOS), INTERFAZ GRAFICA (ABSTRACT WINDOWING TOOLKIT,\par
+SWING, CONTROL DE EVENTOS, APPLETS), ACCESO DESDE JAVA A UNA BASE DE DATOS\par
+(JDBC), ACCESO A LOS RECURSOS DEL SISTEMA, EMPAQUETADO Y DESPLIEGUE DE\par
+APLICACIONES JAVA.\par
+ JSP: ETIQUETAS Y ENCABEZADOS, ACCESO A BASES DE DATOS(CONEXI\'d3N POR ODBC,\par
+CONEXI\'d3N POR DRIVER JDBC), PATRONES DE DISE\'d1O DE SESI\'d3N DE DATOS (DAO (DATA\par
+ACCESS OBJECT), VO (VALUE OBJECT)), PULL DE CONEXIONES JDBC, SERVLETS (APLICACI\'d3N\par
+DE LOS SERVLETS COMO CONTROLADORES DE FLUJO), ARQUITECTURA EN TRES CAPAS\par
+(PRESENTACI\'d3N, NEGOCIACI\'d3N, SESI\'d3N), AYUDANTES DE VISTA (VIEW HELPERS, TAGLIBS),\par
+PATR\'d3N MVC (MODELO VISTA CONTROLADOR), REPORTES WEB CON IREPORTS Y JASPER\par
+REPORTS, JAVA MAIL (ADMINISTRACI\'d3N DE CORREOS CON EL FRAMEWORK DE JAVA MAIL\par
+DESDE JSP Y SERVLETS Y PRUEBAS CON ARGOSOFT MAIL SERVER).\par
+ PHP: GENERALIDADES Y ETIQUETAS EN HTML, TABLAS E IM\'c1GENES, FORMULARIOS Y DIVISIONES,\par
+JAVASCRIPT, VALIDACIONES DE FORMULARIOS, ARREGLOS, MANEJO DE OBJETOS,\par
+FUNDAMENTOS DE PHP, FORMULARIOS Y PHP, MANEJO DE CADENAS, ARCHIVOS, CLASES Y\par
+COMPONENTES, CONEXI\'d3N A BASES DE DATOS, PROGRAMACI\'d3N MULTINIVEL, MANEJO DE\par
+SESIONES, SEGURIDAD Y ENCRIPTAMIENTO, ACCESO DE ARCHIVOS A BASE DE DATOS\par
+(UPLOAD/DOWNLOAD), ADMINISTRACI\'d3N DE PAGINAS DE UN SI, CONFIGURACI\'d3N DE HOSTING\par
+EN LINUX', 'HABILIDADES PROCEDIMENTALES A NIVEL TECNOL\'d3GICO EL HACER TECNOL\'d3GICO EN\par
+CONTEXTO\par
+ HABILIDADES METODOL\'d3GICAS, DE LA ACTUACI\'d3N CONSCIENTE Y REFLEXIVA DE LOS\par
+EJERCICIOS DE MONITOREO DE LO QUE SE HACE APRENDER A APRENDER,\par
+ IDENTIFICAR EL ENTORNO DE TRABAJO DE LAS HERRAMIENTAS DE BASE DE DATOS YA SEA SQL\par
+SERVER U ORACLE\par
+ IDENTIFICAR LAS FUNCIONES DE CADA UNA DE LAS HERRAMIENTAS DE LENGUAJE DE\par
+PROGRAMACI\'d3N. .NET Y JAVA)\par
+ CREAR UNA BASE DE DATOS DE ACUERDO CON UN DISE\'d1O DADO\par
+ MANIPULAR UNA BASE DE DATOS DE ACUERDO CON LAS NECESIDADES DE INFORMACI\'d3N\par
+ DESARROLLAR SISTEMAS DE INFORMACI\'d3N ENTORNO WEB Y CLIENTE SERVIDOR', 'ELABORA EL PLAN DE TRABAJO, DE ACUERDO CON LA INTERPRETACI\'d3N DEL INFORME T\'c9CNICO DE\par
+DISE\'d1O, SEG\'daN NORMAS Y PROTOCOLOS DE LA EMPRESA.\par
+ CREA LA BASE DE DATOS EN EL MOTOR DE BASE DE DATOS SELECCIONADO, SIGUIENDO\par
+ESPECIFICACIONES T\'c9CNICAS DEL INFORME, SEG\'daN NORMAS Y PROTOCOLOS DE LA EMPRESA.\par
+ CONSTRUYE LA INTERFAZ DEL APLICATIVO, SIGUIENDO LOS PAR\'c1METROS ESTABLECIDOS EN EL DISE\'d1O QUE CUMPLA CON LAS NECESIDADES DEL USUARIO FINAL.\par
+ UTILIZA LAS HERRAMIENTAS DE DESARROLLO, PARA LA CODIFICACI\'d3N DE LOS M\'d3DULOS DEL SISTEMA, APLICANDO LAS FUNCIONES PROPIAS DEL LENGUAJE DE PROGRAMACI\'d3N SELECCIONADO, DE ACUERDO CON LAS NECESIDADES DEL SISTEMA DE INFORMACI\'d3N.\par
+ ELABORA EL PROGRAMA DE INSTALACI\'d3N DEL APLICATIVO, DE ACUERDO CON LAS CARACTER\'cdSTICAS Y LA ARQUITECTURA DE LA APLICACI\'d3N, UTILIZANDO HERRAMIENTAS TECNOL\'d3GICAS, SEG\'daN NORMAS Y PROTOCOLOS DE LA ORGANIZACI\'d3N.\par
+ ELABORA EL MANUAL T\'c9CNICO DE LA APLICACI\'d3N, DOCUMENTANDO LOS PROCESOS INVOLUCRADOS EN LA ADMINISTRACI\'d3N ESPECIALIZADA DEL SISTEMA DE INFORMACI\'d3N, SEG\'daN NORMAS Y PROCEDIMIENTOS DE LA ORGANIZACI\'d3N. REALIZA Y DOCUMENTA LAS PRUEBAS DEL SOFTWARE SEG\'daN EL PLAN ESTABLECIDO, PARA\par
+DEFINIR ACCIONES CORRECTIVAS A SEGUIR Y ASEGURAR EL BUEN FUNCIONAMIENTO DE SISTEMA DE INFORMACI\'d3N', 220501007);\par
+\par
+insert into knowledge_and_criteria (knowledge, knowledge_processes, evaluation_criteria, code_competencies_know_crit)\par
+values ('INFORMES DE REQUERIMIENTOS: AN\'c1LISIS, INTERPRETACI\'d3N Y TOMA DE DECISIONES PROPUESTAS DE TRABAJO: TIPOS, CARACTER\'cdSTICAS, ELABORACI\'d3N CALIDAD DE SOFTWARE: HISTORIA, CARACTER\'cdSTICAS, METODOLOG\'cdAS Y NORMAS.\par
+L\'d3GICA : FUNDAMENTOS, M\'c9TODOS GESTI\'d3N DE PROCESOS: TIPOS, CARACTER\'cdSTICAS, METODOLOG\'cdAS. ORIENTACI\'d3N A OBJETOS: CONCEPTOS, FUNDAMENTOS DEL AN\'c1LISIS, METODOLOG\'cdAS (RUP, UML), T\'c9CNICAS DE PROGRAMACI\'d3N DATOS: CONCEPTO, ESTRUCTURA, DICCIONARIO DE DATOS, BASES DE DATOS, T\'c9CNICAS DE\par
+PROGRAMACI\'d3N MINI ESPECIFICACIONES: DEFINICI\'d3N, CARACTER\'cdSTICAS, CASOS DE APLICACI\'d3N', 'ELABORAR PROPUESTA DE TRABAJO (ELABORAR CRONOGRAMA, RECOMENDACIONES,\par
+SELECCI\'d3N DE EQUIPO DE TRABAJO; PERFIL, EXPERIENCIA), AJUSTE AL PRESUPUESTO DE\par
+AN\'c1LISIS Y TIEMPOS. ELABORAR DIAGRAMAS DE CASOS DE USO. ELABORAR DIAGRAMAS DE CLASES. ELABORAR DIAGRAMAS DE TRANSICI\'d3N DE ESTADO. ELABORAR DIAGRAMAS DE SECUENCIAS.\par
+REALIZAR EL MODELO CONCEPTUAL DE LA SOLUCI\'d3N PROPUESTA REALIZAR ALGORITMOS UTILIZANDO VARIABLES, CONSTANTES, VARIABLES, BUCLES,\par
+CONTADORES, ACUMULADORES, SELECCI\'d3N, SEUDOC\'d3DIGO. REALIZAR ALGORITMOS UTILIZANDO ATRIBUTOS, OBJETOS, M\'c9TODOS ELABORAR BASES DE DATOS.\par
+ELABORAR DICCIONARIO DE DATOS. REALIZAR LAS MINI ESPECIFICACIONES. REALIZAR EL INFORME DE AN\'c1LISIS DEL SISTEMA QUE CUMPLA CON LOS REQUERIMIENTOS DE LA EMPRESA.', 'ELABORA PROPUESTAS DE TRABAJO, DE ACUERDO CON LA INTERPRETACI\'d3N DE LAS NECESIDADES TECNOL\'d3GICAS, EXPUESTAS EN EL INFORME DE REQUERIMIENTOS, SEG\'daN NORMAS Y PROTOCOLOS DE LA EMPRESA.\par
+UTILIZA HERRAMIENTAS CASE PARA ELABORAR DIAGRAMAS DE CASOS DE USO, QUE REPRESENTEN EL ESTADO ACTUAL DE LOS COMPONENTES DEL SISTEMA, APOYADO EN EL AN\'c1LISIS DEL INFORME DE REQUERIMIENTOS. ELABORA LOS DIAGRAMAS UML, DE ACUERDO CON LAS CARACTER\'cdSTICAS DE CADA UNO DE\par
+ELLOS, BASADO EN LOS REQUERIMIENTOS DEL CLIENTE, UTILIZANDO HERRAMIENTAS CASE. REPRESENTA PROCESOS DEL SISTEMA A PARTIR DE LA CONSTRUCCI\'d3N DE ALGORITMOS, COMO PARTE DE LA SOLUCI\'d3N A SITUACIONES PLANTEADAS, UTILIZANDO LENGUAJES DE\par
+PROGRAMACI\'d3N ORIENTADOS A OBJETOS. MODELA LA BASE DE DATOS, A PARTIR DE LA VALORACI\'d3N DE LA INFORMACI\'d3N OBTENIDA EN EL DICCIONARIO DE DATOS Y EL AN\'c1LISIS DE LOS PROCESOS, DE ACUERDO CON LAS NECESIDADES DEL SISTEMA DE INFORMACI\'d3N REQUERIDO.\par
+ REALIZA EL INFORME DE AN\'c1LISIS DEL SISTEMA DE INFORMACI\'d3N REQUERIDO, PRESENTANDO\par
+EL ESTADO ACTUAL DE LA ORGANIZACI\'d3N, Y PROPONIENDO ALTERNATIVAS DE SOLUCI\'d3N, DE ACUERDO CON LAS NORMAS Y PROTOCOLOS ESTABLECIDOS.', 220501032 );\par
+\par
+insert into knowledge_and_criteria (knowledge, knowledge_processes, evaluation_criteria, code_competencies_know_crit)\par
+values ('*\tab About me: Adquisici\'f3n de mayor habilidad comunicativa utilizando el lenguaje introductivo. C\'f3mo presentarse\par
+presentarse y responder preguntas personales.\par
+-Be affirmative. Yes/ No Questions, Contractions, Short Answers, Present Simple.\par
+*My Day: Adquisici\'f3n del lenguaje que se utiliza diariamente para hablar de ocupaciones y rutinas diarias.\par
+-Articles, Negative, WH Questions who, what, Affirmative, Yes/No Questions, Verbs describring day to day activities,\par
+*Supermarket and Clothes Shopping: Adquisici\'f3n de lenguaje y vocabulario necesarios para hacer compras en un S\'faper\par
+Mercado, conocimiento de nombres de de alimentos y bebidas. Vocabulario sobre ropa, colores y meses del a\'f1o.\par
+-This/That/These/Those, Singular/Plural, There Is/There Are, comparative and superlative adjectives.\par
+*Places: Vocabulario y habilidades comunicativas para trasladarse, visitar ciudades, solicitar informaci\'f3n, desenvolverse\par
+en una ciudad.\par
+-Comparatives, WH questions, Subject pronouns, Object pronouns, present progresive.\par
+*Food and restaurant: Vocabulario y habilidades comunicativas para leer y comprender la carta, hacer preguntas, ordenar\par
+o sugerir un plato, pedir la cuenta.\par
+-WH Questions, when, where, why, how, presente simple vs Presente Progresivo.\par
+*Permission and request. Talking about ability.\par
+-Modals for hability: can/can\'b4t, Modals for permission and request: can/could, Countable and uncountable nous.\par
+*Travel and transportaion: Vocabulario y expresiones relativas a viajes, transporte y desplazamiento.\par
+-Past simple, Past of To Be, Past Simple vs Past Progressive.', '-\tab Reconocer palabras y expresiones muy b\'e1sicas que se usan habitualmente relativas a si mismo y a su entorno.\par
+-\tab Reconocer vocabulario t\'e9cnico b\'e1sico.\par
+-\tab Participar en una conversaci\'f3n de forma sencilla si el interlocutor est\'e1 dispuesto a repetir lo que ha dicho o a usar un\par
+vocabulario b\'e1sico, y a reformular lo que ha intentado decir.\par
+-\tab Utilizar expresiones y frases sencillas para describir su entorno y relacionarse en su sitio de pr\'e1ctica o trabajo.\par
+-\tab Escribir postales cortas y sencillas y anuncios cortos.\par
+-\tab Llenar formularios o registros con datos personales.\par
+-\tab Comprender la idea principal en avisos y mensajes breves, claros y sencillos en ingl\'e9s t\'e9cnico.\par
+-\tab Leer textos muy breves y sencillos en ingl\'e9s general y t\'e9cnico.\par
+-\tab Obtener informaci\'f3n espec\'edfica y predecible en escritos sencillos y cotidianos.\par
+-\tab Obtener vocabulario y expresiones de ingl\'e9s t\'e9cnico en anuncios, folletos, p\'e1ginas web, etc.\par
+-\tab Interactuar en tareas sencillas y habituales que requieren un intercambio simple y directo de informaci\'f3n cotidiana y\par
+t\'e9cnica.\par
+-\tab  Realizar intercambios sociales y pr\'e1cticos muy breves,\par
+-\tab Describir con t\'e9rminos sencillos su entorno y entablar conversaciones cortas, utilizando una serie de expresiones y frases\par
+en ingl\'e9s general y t\'e9cnico.\par
+-\tab Escribir notas y mensajes breves y sencillos relativos a sus necesidades inmediatas, mediante la utilizaci\'f3n de un\par
+vocabulario b\'e1sico de ingl\'e9s general y t\'e9cnico.', '-\tab Interpreta un texto sencillo y puede construir un mapa conceptual basado en el mismo. Pronuncia adecuadamente el vocabulario y modismos b\'e1sicos del idioma\par
+Sostiene conversaciones con vocabulario b\'e1sico y t\'e9cnico aprendido. Estructura adecuadamente una opini\'f3n sobre un tema conocido de su especialidad. Elabora res\'famenes cortos sobre textos sencillos, \par
+y con contenido t\'e9cnico. Escribe o presenta descripciones de s\'ed mismo, su profesi\'f3n y su entorno.Plantea y responde preguntas sobre s\'ed mismo.', 240201501);\par
+/* CONSULTA PARA LA TABLA CONOCIMIENTOS Y CRITERIOS */\par
+\par
+select * from knowledge_and_criteria ;\par
+\par
+\par
+/***************************TABLA CONTROL_DOCUMENTO****************/\par
+create table control_document (\par
+code_square_control bigint primary key auto_increment,\par
+type_intervention varchar (20) not null,\par
+datedocument date not null,\par
+code_center_training_cont_docum bigint,\par
+constraint code_center_training3 foreign key (code_center_training_cont_docum) references training_center(code_center_training),\par
+identification_cont_docum bigint,\par
+constraint identificationc foreign key (identification_cont_docum ) references person (identification),\par
+code_curricular_design_cont_docum  bigint,\par
+constraint code_curricular_design2 foreign key (code_curricular_design_cont_docum) references curricular_design(code_curricular_design)\par
+);\par
+\par
+insert into control_document(type_intervention, datedocument, code_center_training_cont_docum, identification_cont_docum, code_curricular_design_cont_docum)\par
+values ('Autor','2017-09-01',1,1007392829, 228120);\par
+insert into control_document (type_intervention, datedocument, code_center_training_cont_docum, identification_cont_docum, code_curricular_design_cont_docum)\par
+values ('Aprobaci\'f3n','2017-09-01',1,107392829, 228120);\par
+select * from control_document;\par
+\par
+SELECT code_curricular_design,denomination_program,version,state,date_start,date_end,duration_lective_m,duration_practice_m,total_months,training_level,justification_d_c,requirements_entry,description,quantity_competencies,requirements_academic,work_experience, minimal_competencies,methodological_strategy,name_center_training,regional,code_competencies,denomination_competencies,version_ncl,duration_estimated_h,code_learning_outcomes,denomination_learning_outcomes,type_learning_outcomes,knowledge,knowledge_processes,evaluation_criteria,type_intervention,datedocument,nameperson,lastname,position FROM curricular_design \par
+INNER JOIN training_center ON training_center.code_center_training=curricular_design.code_center_training_curric_design\par
+INNER JOIN competencies_developed ON curricular_design.code_curricular_design=competencies_developed.code_curricular_design_comp_devel\par
+INNER JOIN learning_outcomes ON learning_outcomes.code_competencies_learn_outc=competencies_developed.code_competencies\par
+INNER JOIN knowledge_and_criteria ON knowledge_and_criteria.code_competencies_know_crit=competencies_developed.code_competencies     \par
+INNER JOIN control_document ON control_document.code_curricular_design_cont_docum=curricular_design.code_curricular_design\par
+INNER JOIN person ON person.identification=control_document.identification_cont_docum;\par
+\par
+\par
+/***************************TABLA PROYECTO_FORMATIVO****************/\par
+create table training_project (\par
+code_training_project bigint primary key,\par
+name_training_project varchar(100) not null,\par
+time_execution_m tinyint unsigned not null,\par
+participating_companies varchar(100) not null,\par
+keywords varchar(100) not null,\par
+num_r_a_specific tinyint unsigned not null,\par
+num_r_a_transverse tinyint unsigned not null,\par
+num_r_a_basic tinyint unsigned not null,\par
+num_total_r_a tinyint unsigned not null,\par
+plating_prob varchar(1000) not null,\par
+justification_p_f varchar(1000) not null,\par
+general_objective varchar(200) not null,\par
+benefits_project varchar(200) not null,\par
+restrictions_riskas varchar(500) not null,\par
+products_results varchar(500) not null,\par
+valoration_productive varchar(500) not null,\par
+num_instructors tinyint unsigned not null,\par
+num_apprentices smallint unsigned not null,\par
+description_environment_p_f varchar(500) not null,\par
+total_items_budgets bigint unsigned not null,\par
+status_training_project varchar(20) null default 'Sin verificaci\'f3n',\par
+code_curricular_design_trai_proj bigint ,\par
+constraint code_curricular_design3 foreign key (code_curricular_design_trai_proj) references curricular_design(code_curricular_design),\par
+code_center_training_trai_proj bigint ,\par
+constraint code_center_training1 foreign key (code_center_training_trai_proj) references training_center (code_center_training)\par
+);\par
+\par
+/*******INSERCI\'d3N PARA LA TABLA PROYECTO FORMATIVO*******************/\par
+INSERT INTO training_project (code_training_project,name_training_project,time_execution_m,participating_companies,keywords,num_r_a_specific,num_r_a_transverse, num_r_a_basic, num_total_r_a, plating_prob, justification_p_f, general_objective, benefits_project, restrictions_riskas, products_results, valoration_productive, num_instructors, num_apprentices, description_environment_p_f, total_items_budgets, code_curricular_design_trai_proj , code_center_training_trai_proj)\par
+values (704330,'SISTEMA DE INFORMACI\'d3N PARA LA GESTI\'d3N EMPRESARIAL V1.3', 24, 'SENA, Colegios en convenio (p\'fablicos, privados y en concesi\'f3n).', \par
+'software sistema de informaci\'f3n integraci\'f3n articulacion', 15, 0, 15, 30, 'El microempresario promedio dif\'edcilmente encuentra tiempo para llevar a cabo todas las funciones propias del ejercicio empresarial tales como: las compras, las ventas, la producci\'f3n, el manejo de personal, manejo del efectivo. El empresario ocupa su tiempo m\'e1s en cuestiones gerenciales que en labores de orden operativa o t\'e9cnica.\par
+En cuanto a la falta de informaci\'f3n (no s\'f3lo de inventarios, sino de cualquier tipo de operaci\'f3n) se presentan las siguientes dificultades:\par
+La informaci\'f3n es solamente entendida por profesionales del \'e1rea de contabilidad Los sistemas de informaci\'f3n son dif\'edciles de adquirir por su costo y complicado manejo. Se necesita personal especializado para llevar a cabo estas tareas.',\par
+'Lo que se busca con este proyecto es crear un sistema de informaci\'f3n que soporte los procesos, propios de la compa\'f1\'eda.\par
+El prop\'f3sito consiste en mejorar los procesos de la siguiente manera:\par
+Gesti\'f3n por M\'f3dulo: Realiza una integraci\'f3n de cada modulo para generar la centralizaci\'f3n de informaci\'f3n de las empresas\par
+Adaptabilidad: Totalmente flexible. Se adapta a cualquier tipo de empresa.\par
+Consultas: Podr\'e1 acceder a un sinn\'famero de consultas predefinidas.\par
+B\'fasqueda R\'e1pida: Los datos pueden ordenarse en cualquier momento por el campo que se desee.\par
+Recurso Humano: Podr\'e1 visualizar los datos b\'e1sicos y los pagos efectuados a cada empleado.\par
+Seguridad y Confidencialidad: Permisos concretos de acceso',\par
+'Desarrollar el sistema de informaci\'f3n con base en los requerimientos esenciales de las empresas.',\par
+'Empresas del sector que requieran optimizar sus procesos operativos',\par
+'Que no se disponga de conectividad,Recurso presupuestal insuficiente para la implantaci\'f3n,Ausencia de infraestructura, tecnol\'f3gica en donde se va a implementar el proyecto',\par
+'1. Documento con las evidencias del levantamiento de la informaci\'f3n. 2. Documento con el dise\'f1o de la capa de aplicaci\'f3n y capa de datos. 3. Entrega del sistema de informaci\'f3n.',\par
+'Con el desarrollo del proyecto se puede satisfacer la necesidad de un cliente potencial? SI Viabilidad de proyecto para plan de negocio? ',\par
+5, 999, 'Ambiente de Desarrollo de Software Colegios, Ambiente Virtual de Aprendizaje', 15400000, 228120, 1);\par
+/*******CONSULTA DE LA TABLA PROYECTO FORMATIVO\'a8*******/\par
+select *from training_project;\par
+\par
+/***************************TABLA FICHA_ASOCIADAS****************/\par
+create table tokens_associated (\par
+code_tokens  bigint primary key auto_increment,\par
+quantity_tokens tinyint unsigned not null,\par
+code_training_project_tok_asso bigint,\par
+constraint code_training_project1 foreign key (code_training_project_tok_asso) references training_project (code_training_project)\par
+);\par
+/*******INSERCI\'d3N DE LA TABLA FICHAS ASOCIADAS*******/\par
+INSERT INTO tokens_associated (quantity_tokens, code_training_project_tok_asso)\par
+values (47,704330);\par
+/*******CONSULTA DE LA TABLA FICHAS ASOCIADAS*******/\par
+select* from tokens_associated;\par
+\par
+/***************************TABLA PLANEACION_PROYECTO_FORMATIVO****************/\par
+create table training_project_planning (\par
+code_plan_proj_tra bigint primary key auto_increment,\par
+type_phase_project varchar (20) not null,\par
+denomination_phase_project varchar (50) not null,\par
+denomination_activ_project varchar(100) not null,\par
+code_learning_outcomes_tra_pro_pla bigint,\par
+constraint code_learning_outcomes1 foreign key (code_learning_outcomes_tra_pro_pla) references learning_outcomes(code_learning_outcomes),\par
+code_training_project bigint,\par
+constraint code_training_project0 foreign key (code_training_project) references training_project(code_training_project)\par
+);\par
+/*********** INSERCI\'d3N DE LA TABLA PLANEACI\'d3N DE PROYECTO FORMATIVO *******/\par
+INSERT INTO training_project_planning (type_phase_project,denomination_phase_project,denomination_activ_project, code_learning_outcomes_tra_pro_pla,code_training_project)\par
+values ('Ejecuci\'f3n','DISE\'d1O O FORMULACION DEL PROYECTO (DESAROLLO)','DESARROLLO DE LA BASE DE DATOS.', 437657, 704330);\par
+INSERT INTO training_project_planning (type_phase_project,denomination_phase_project,denomination_activ_project, code_learning_outcomes_tra_pro_pla,code_training_project)\par
+values ('Desarrollo','IDENTIFICACI\'d3N DEL PROBLEMA (AN\'c1LISIS Y DISE\'d1O)','DISE\'d1AR EL MODELO ENTIDAD RELACI\'d3N Y DE DATOS', 437633, 704330);\par
+/***************************CONSULTA PARA LA TABLA PLANEACI\'d3N DE PROYECTO FORMATIVO****************/\par
+select * from training_project_planning; \par
+\par
+/***************************TABLA IMPACTOS_PROYECTO****************/\par
+create table impacts_project (\par
+code_impacts bigint primary key auto_increment,\par
+type_impacts varchar(20) not null,\par
+description_impacts varchar(200),\par
+code_training_project bigint ,\par
+constraint code_training_project2 foreign key (code_training_project) references training_project(code_training_project)\par
+);\par
+/****************INSERCI\'d3N PARA LA TABLA IMPACTOS PROYECTO**************/\par
+INSERT INTO impacts_project (type_impacts,description_impacts,code_training_project)\par
+values ('Social', 'Mejoramiento en la prestacion de los servicios ofrecidos por las empresas, agilizaci\'f3n de la generaci\'f3n de nominas',704330);\par
+INSERT INTO impacts_project (type_impacts,description_impacts,code_training_project)\par
+values ('Econ\'f3mico', 'Mejora en el proceso de inventarios, evitando perdidas por carencia o exceso de productos',704330);\par
+INSERT INTO impacts_project (type_impacts,description_impacts,code_training_project)\par
+values ('Ambiental', 'Reduccion del uso de papel y tinta.',704330);\par
+INSERT INTO impacts_project (type_impacts,description_impacts,code_training_project)\par
+values ('Tecnol\'f3gico', 'Mejoramiento en la productividad en los procesos, operativos de la empresa.',704330);\par
+/****************CONSULTA PARA LA TABLA IMPACTOS PROYECTO****************/\par
+select * from impacts_project;\par
+/***************************TABLA RECURSOS_ESTIMADOS****************/\par
+create table estimated_resources (\par
+code_resources_estimated bigint primary key auto_increment,\par
+duration_month tinyint unsigned not null,\par
+type_resources varchar (50) not null,\par
+description_specialty varchar (200) not null,\par
+quantity tinyint unsigned not null,\par
+value_unit bigint unsigned not null,\par
+value_total bigint not null,\par
+source_resource varchar(100) not null,\par
+code_training_project bigint,\par
+constraint code_training_project3 foreign key (code_training_project) references training_project (code_training_project)\par
+);\par
+/****************INSERCI\'d3N PARA LA TABLA IMPACTOS PROYECTO**************/\par
+insert into estimated_resources (duration_month, type_resources, description_specialty, quantity, value_unit, value_total, source_resource, code_training_project)\par
+values (6, 'Herramientas', 'Equipos de c\'f3mputo con Sistema Operativo Windows 7 o Superior,tarjeta de red, memoria Ram 2 GB, Disco Duro de 160 GB', 35, 1800000, 63000000, 'MATERIALES PARA FORMACION PROFESIONAL',704330);\par
+insert into estimated_resources (duration_month, type_resources, description_specialty, quantity, value_unit, value_total, source_resource, code_training_project)\par
+values (6, 'Materiales de formaci\'f3n cosumibles', 'Manuales t\'e9cnicos, videotutoriales, Multimedia, Marcadores, Proyector', 1,  2000000, 2000000, 'MATERIALES PARA FORMACION PROFESIONAL',704330);\par
+insert into estimated_resources (duration_month, type_resources, description_specialty, quantity, value_unit, value_total, source_resource, code_training_project)\par
+values (6, 'Talento humano', 'Tecnologos Desarrolladores de Software y/o Ingenieros de Sistemas', 5, 3080000 , 15400000, 'MATERIALES PARA FORMACION PROFESIONAL',704330);\par
+/****************CONSULTA PARA LA TABLA IMPACTOS PROYECTO**************/\par
+SELECT * FROM estimated_resources;\par
+\par
+/***************************TABLA EQUIPO_FORMULACION_PROYECTO****************/\par
+create table formulation_equipment_project (\par
+code_team_project bigint primary key auto_increment,\par
+specialty varchar (50) not null,\par
+name_center varchar (100) not null,\par
+regional_e_p varchar (50) not null,\par
+code_training_project_for_equi_pro  bigint,\par
+constraint code_training_project4 foreign key (code_training_project_for_equi_pro) references training_project (code_training_project),\par
+identification_for_equi_pro bigint,\par
+constraint identification3 foreign key (identification_for_equi_pro) references person(identification)\par
+);\par
+/****************INSERCI\'d3N PARA LA TABLA FORMULACI\'d3N DE EQUIPO DE PROYECTO**************/\par
+INSERT INTO formulation_equipment_project (specialty, name_center, regional_e_p, code_training_project_for_equi_pro, identification_for_equi_pro)\par
+values ('Desarrollo','CENTRO DE GESTION DE MERCADOS, LOGISTICA Y TECNOLOGIAS DE LA INFORMACION','Regional Distrito Capital',704330 ,1007392829);\par
+INSERT INTO formulation_equipment_project (specialty, name_center, regional_e_p, code_training_project_for_equi_pro, identification_for_equi_pro)\par
+values ('Desarrollo','CENTRO DE GESTION DE MERCADOS, LOGISTICA Y TECNOLOGIAS DE LA INFORMACION','Regional Distrito Capital',704330 ,107392829);\par
+\par
+/***************************TABLA OBJETIVOS_ESPECIFICOS****************/\par
+create table specific_objectives (\par
+code_specific_objectives bigint primary key auto_increment,\par
+description_specific_objectives varchar(100) not null,\par
+code_training_project bigint,\par
+constraint code_training_project5 foreign key (code_training_project) references training_project(code_training_project)\par
+);\par
+/********************inserci\'f3n tabla objetivos especificos *******/\par
+insert into specific_objectives (description_specific_objectives,code_training_project)\par
+values ('Realizar el levantamiento de la informaci\'f3n.', 704330);\par
+insert into specific_objectives (description_specific_objectives,code_training_project)\par
+values ('Realizar el modelado de la base de datos y de la capa aplicaci\'f3n.', 704330);\par
+insert into specific_objectives (description_specific_objectives,code_training_project)\par
+values ('Integrar la capa de datos con la capa de aplicaci\'f3n', 704330);\par
+/**************************CONSULTA DE LA TABLA OBJETIVOS ESPECIFICOS************************/\par
+SELECT * from specific_objectives;\par
+\par
+/***************************TABLA INNOVACION_TECNOLOGICA****************/\par
+create table technological_innovation (\par
+code_technological_innovation bigint primary key auto_increment,\par
+description_itechnological_innovation varchar(80) ,\par
+code_training_project bigint,\par
+constraint code_training_project6 foreign key (code_training_project) references training_project(code_training_project)\par
+);\par
+/********************inserci\'f3n tabla objetivos especificos *******/\par
+insert into technological_innovation (description_itechnological_innovation, code_training_project)\par
+values ('El proyecto resuelve una necesidad del sector productivo?',704330);\par
+insert into technological_innovation (description_itechnological_innovation, code_training_project)\par
+values ('Los productos finales son susceptibles a protecci\'f3n industrial y/o derechos de autor?',704330);\par
+insert into technological_innovation (description_itechnological_innovation, code_training_project)\par
+values ('El proyecto mejora el proceso/producto/servicio existente?',704330);\par
+\par
+select * from technological_innovation;\par
+\par
+SELECT * FROM  training_project\par
+INNER JOIN training_center ON training_center.code_center_training.\par
+INNER JOIN  ON \par
+INNER JOIN  ON \par
+INNER JOIN ON      \par
+INNER JOIN ON \par
+INNER JOIN ON\par
+\par
+SELECT  code_curricular_design,denomination_program,version,state,date_start,date_end,duration_lective_m,duration_practice_m,total_months,training_level,justification_d_c,requirements_entry,description,quantity_competencies,requirements_academic,work_experience, minimal_competencies,methodological_strategy,name_center_training,regional,code_competencies,denomination_competencies,version_ncl,duration_estimated_h,code_learning_outcomes,denomination_learning_outcomes,type_learning_outcomes,knowledge,knowledge_processes,evaluation_criteria,type_intervention,datedocument,nameperson,lastname,position FROM curricular_design \par
+INNER JOIN training_center ON training_center.code_center_training=curricular_design.code_center_training_curric_design\par
+INNER JOIN competencies_developed ON curricular_design.code_curricular_design=competencies_developed.code_curricular_design_comp_devel\par
+INNER JOIN learning_outcomes ON learning_outcomes.code_competencies_learn_outc=competencies_developed.code_competencies\par
+INNER JOIN knowledge_and_criteria ON knowledge_and_criteria.code_competencies_know_crit=competencies_developed.code_competencies     \par
+INNER JOIN control_document ON control_document.code_curricular_design_cont_docum=curricular_design.code_curricular_design\par
+INNER JOIN person ON person.identification=control_document.identification_cont_docum;\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+/***************************TABLA PLANEACION_PEDAGOGICA****************/\par
+create table pedagogical_planning (\par
+code_pedagogical_planning bigint primary key,\par
+city varchar (30) not null,\par
+date_ date not null,\par
+phase_project varchar (20) not null,\par
+team_executor varchar(100)  null default 'sin informaci\'f3n',\par
+date_startpp date not null,\par
+date_endpp date not null,\par
+scenarios varchar(50) not null,\par
+devolutive_material varchar(50) not null,\par
+consumable_material varchar(50) not null,\par
+Responsible_instructors varchar(50) not null,\par
+observations varchar(50) not null,\par
+status_pedagogical_planning varchar(20) null default 'Sin verificaci\'f3n',\par
+code_training_project bigint,\par
+constraint code_training_project7 foreign key (code_training_project) references training_project (code_training_project),\par
+code_center_training bigint,\par
+constraint code_center_training2 foreign key (code_center_training) references training_center(code_center_training)\par
+);\par
+\par
+/***************************TABLA COMPLEMENTO_PLANEACION_PEDAGOGICA****************/\par
+create table complement_pedagogical_planning (\par
+code_complement_plan_pedag bigint primary key auto_increment,\par
+duration_activ_project tinyint unsigned not null,\par
+evaluation_criteria_pp varchar(100) not null,\par
+code_pedagogical_planning bigint,\par
+constraint code_pedagogical_planning0 foreign key (code_pedagogical_planning) references pedagogical_planning(code_pedagogical_planning)\par
+);\par
+/***************************TABLA ACTIVIDAD_APRENDIZAJE****************/\par
+create table learning_activity (\par
+code_learning_activity bigint primary key auto_increment,\par
+type_area_development varchar(15) not null,\par
+denomination_learning_activity varchar(80) not null,\par
+duration_learning_activity_h tinyint unsigned not null,\par
+active_didactic_strategy varchar(50) not null,\par
+evaluation_criteria varchar(80),\par
+code_pedagogical_planning bigint,\par
+constraint code_pedagogical_planning1 foreign key (code_pedagogical_planning) references pedagogical_planning(code_pedagogical_planning)\par
+);\par
+/***************************TABLA EVIDENCIA_APRENDIZAJE****************/\par
+create table evidence_learning (\par
+code_evidence_learning bigint primary key auto_increment,\par
+type_evidence_learning varchar(30) not null,\par
+description_evidence_learning varchar(50),\par
+code_pedagogical_planning bigint,\par
+constraint code_pedagogical_planning2 foreign key (code_pedagogical_planning) references pedagogical_planning(code_pedagogical_planning)\par
+);\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+\par
+/***************************TABLA CRONOGRAMA_GANTT****************/\par
+create table schedule_gantt (\par
+code_schedule_gantt bigint primary key,\par
+description varchar(80) not null,\par
+period varchar(15) not null,\par
+code_pedagogical_planning bigint,\par
+status_schedule_gantt varchar(20) null default 'Sin verificaci\'f3n',\par
+constraint code_pedagogical_planning3 foreign key (code_pedagogical_planning) references pedagogical_planning(code_pedagogical_planning)\par
+);\par
+/***************************TABLA ACTIVIDAD_CLASE****************/\par
+create table class_activity (\par
+code_activity_class bigint primary key auto_increment,\par
+descripction_activity_class varchar(80) not null,\par
+date_start_activity_class date not null,\par
+date_end_activity_class date not null,\par
+code_schedule_gantt bigint,\par
+constraint code_schedule_gantt0 foreign key (code_schedule_gantt) references schedule_gantt (code_schedule_gantt)\par
+);\par
+\par
+/***************************TABLA FECHAS_RESULTADOS DE APRENDIZAJE****************/\par
+create table date_learning_outcomes (\par
+code_date_lo bigint primary key auto_increment,\par
+date_start_lo date not null,\par
+date_end_lo date not null,\par
+code_schedule_gantt_dat_lear_out bigint,\par
+constraint code_schedule_ganttd foreign key (code_schedule_gantt_dat_lear_out) references schedule_gantt (code_schedule_gantt),\par
+code_learning_outcomes_dat_lear_out bigint,\par
+constraint code_learning_outcomesd foreign key (code_learning_outcomes_dat_lear_out) references learning_outcomes (code_learning_outcomes)\par
+);\par
+\par
+\par
+/***************************TABLA FECHAS_ACTIVIDAD DE APRENDIZAJE****************/\par
+create table date_learning_activity (\par
+code_date_la bigint primary key auto_increment,\par
+date_start_la date not null,\par
+date_end_la date not null,\par
+code_schedule_gantt bigint,\par
+constraint code_schedule_gantt2 foreign key (code_schedule_gantt) references schedule_gantt (code_schedule_gantt),\par
+code_learning_activity bigint,\par
+constraint code_learning_activity1 foreign key (code_learning_activity) references learning_activity (code_learning_activity)\par
+);\par
+\par
+/***************************TABLA CUADRO_RESUMEN****************/\par
+create table summary_table (\par
+code_summary_table bigint primary key ,\par
+date_start_program_event date not null,\par
+date_end_program_event date not null,\par
+guide varchar(80) not null,\par
+duration_activ_apprentice tinyint unsigned not null,\par
+status_summary_table varchar(20) null default 'Sin verificaci\'f3n',\par
+code_training_project bigint ,\par
+constraint code_training_project8 foreign key (code_training_project) references training_project(code_training_project),\par
+code_pedagogical_planning bigint ,\par
+constraint code_pedagogical_planning4 foreign key (code_pedagogical_planning) references pedagogical_planning(code_pedagogical_planning),\par
+code_schedule_gantt bigint,\par
+constraint code_schedule_gantt3 foreign key (code_schedule_gantt) references schedule_gantt (code_schedule_gantt)\par
+);\par
+\par
+/***************************TABLA ROLES_PERSONA****************/\par
+create table roles_person (\par
+code_rol_person bigint primary key auto_increment,\par
+identification bigint unsigned,\par
+constraint identificationr foreign key (identification) references person(identification),\par
+code_rol bigint ,\par
+constraint code_rolr foreign key (code_rol) references roles(code_rol),\par
+code_square_control bigint ,\par
+constraint code_square_controlr foreign key (code_square_control) references control_document (code_square_control) \par
+);\par
+\par
+/***************************DETALLES PERSONA DISE\'d1O CURRICULAR****************/\par
+create table details_person_design (\par
+code_details_pd bigint primary key auto_increment,\par
+identification bigint unsigned,\par
+constraint identification0 foreign key (identification) references person (identification),\par
+code_curricular_design bigint,\par
+constraint code_curricular_designp foreign key (code_curricular_design) references curricular_design(code_curricular_design)\par
+);\par
+\par
+/***************************DETALLES PERSONA PROYECTO FORMATIVO****************/\par
+create table details_person_project (\par
+code_details_pp bigint primary key auto_increment,\par
+identification bigint unsigned,\par
+constraint identification1 foreign key (identification) references person (identification),\par
+code_training_project  bigint,\par
+constraint code_training_projectpp  foreign key (code_training_project ) references training_project (code_training_project )\par
+);\par
+/***************************DETALLES PERSONA PLANEACION PEDAGOGICA****************/\par
+create table details_person_pedagogical_planning (\par
+code_details_ppp bigint primary key auto_increment,\par
+identification bigint unsigned,\par
+constraint identification2 foreign key (identification) references person (identification),\par
+code_pedagogical_planning bigint,\par
+constraint code_pedagogical_planningpp foreign key (code_pedagogical_planning) references pedagogical_planning(code_pedagogical_planning)\par
+);\par
+/***************************DETALLES PERSONA CRONOGRAMA GANTT****************/\par
+create table details_person_schedule_gantt (\par
+code_details_p_cg bigint primary key auto_increment,\par
+identification bigint unsigned,\par
+constraint identification3 foreign key (identification) references person (identification),\par
+code_schedule_gantt bigint,\par
+constraint code_schedule_gantt4 foreign key (code_schedule_gantt) references schedule_gantt(code_schedule_gantt)\par
+);\par
+/***************************DETALLES PERSONA CUADRO RESUMEN****************/\par
+create table details_person_summary_table (\par
+code_details_p_cr bigint primary key auto_increment,\par
+identification bigint unsigned,\par
+constraint identification4 foreign key (identification) references person (identification),\par
+code_summary_table bigint,\par
+constraint code_summary_table1 foreign key (code_summary_table) references summary_table(code_summary_table)\par
+);\par
+}
+ 
